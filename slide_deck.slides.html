@@ -13265,195 +13265,17 @@ $(document).ready(function(){
 <h1 id="FordBike-customer-behaviours-in-2018">FordBike customer behaviours in 2018<a class="anchor-link" href="#FordBike-customer-behaviours-in-2018">&#182;</a></h1>
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The data set contains approx 185,000 rides taken in 2018. It contains trip data(start/end time), as well as customer data(age, gender).</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <p>The most interest for me was the information about bike rental start, to identify the day/time, when the bikes are in high demand.</p>
 <p>Second area of interest is demographics - age/gender, that could help make better the business decisions and marketing.</p>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input_hidden">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input_hidden">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;df_master_clean.csv&#39;</span><span class="p">)</span>
-<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>duration_sec</th>
-      <th>start_time</th>
-      <th>end_time</th>
-      <th>start_station_id</th>
-      <th>start_station_name</th>
-      <th>start_station_latitude</th>
-      <th>start_station_longitude</th>
-      <th>end_station_id</th>
-      <th>end_station_name</th>
-      <th>end_station_latitude</th>
-      <th>...</th>
-      <th>member_birth_year</th>
-      <th>member_gender</th>
-      <th>bike_share_for_all_trip</th>
-      <th>start_time_month</th>
-      <th>start_time_month_number</th>
-      <th>start_time_weekday</th>
-      <th>start_time_hour</th>
-      <th>end_time_hour</th>
-      <th>member_age</th>
-      <th>duration_min</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>598</td>
-      <td>2018-02-28 23:59:47.097</td>
-      <td>2018-03-01 00:09:45.187</td>
-      <td>284.0</td>
-      <td>Yerba Buena Center for the Arts (Howard St at ...</td>
-      <td>37.784872</td>
-      <td>-122.400876</td>
-      <td>114.0</td>
-      <td>Rhode Island St at 17th St</td>
-      <td>37.764478</td>
-      <td>...</td>
-      <td>1988.0</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>February</td>
-      <td>2</td>
-      <td>Wed</td>
-      <td>23</td>
-      <td>0</td>
-      <td>31</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>943</td>
-      <td>2018-02-28 23:21:16.495</td>
-      <td>2018-02-28 23:36:59.974</td>
-      <td>6.0</td>
-      <td>The Embarcadero at Sansome St</td>
-      <td>37.804770</td>
-      <td>-122.403234</td>
-      <td>324.0</td>
-      <td>Union Square (Powell St at Post St)</td>
-      <td>37.788300</td>
-      <td>...</td>
-      <td>1987.0</td>
-      <td>Male</td>
-      <td>No</td>
-      <td>February</td>
-      <td>2</td>
-      <td>Wed</td>
-      <td>23</td>
-      <td>23</td>
-      <td>32</td>
-      <td>15</td>
-    </tr>
-  </tbody>
-</table>
-<p>2 rows × 23 columns</p>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input_hidden">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">customer</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;user_type == &quot;Customer&quot;&#39;</span><span class="p">)[</span><span class="s1">&#39;bike_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">customer_proportion</span> <span class="o">=</span> <span class="n">customer</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bike_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-
-<span class="n">subscriber</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;user_type == &quot;Subscriber&quot;&#39;</span><span class="p">)[</span><span class="s1">&#39;bike_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="n">subscriber_proportion</span> <span class="o">=</span> <span class="n">subscriber</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bike_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13461,14 +13283,15 @@ $(document).ready(function(){
 
 </div>
 </div>
-</div>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Customer&#39;</span><span class="p">,</span> <span class="s1">&#39;Subscriber&#39;</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Trips by subscription type plot</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Customer&#39;</span><span class="p">,</span> <span class="s1">&#39;Subscriber&#39;</span><span class="p">]</span>
 <span class="n">sizes</span> <span class="o">=</span> <span class="p">[</span><span class="n">customer_proportion</span><span class="p">,</span> <span class="n">subscriber_proportion</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">,</span> <span class="n">autopct</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">startangle</span> <span class="o">=</span> <span class="mi">90</span><span class="p">)</span>
@@ -13504,7 +13327,7 @@ $(document).ready(function(){
 </div>
 </div>
 
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13521,17 +13344,19 @@ $(document).ready(function(){
 
 </div>
 </div>
-</div>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time_weekday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time_weekday&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sun&#39;</span><span class="p">,</span> <span class="s1">&#39;Mon&#39;</span><span class="p">,</span><span class="s1">&#39;Tue&#39;</span><span class="p">,</span><span class="s1">&#39;Wed&#39;</span><span class="p">,</span><span class="s1">&#39;Thu&#39;</span><span class="p">,</span><span class="s1">&#39;Fri&#39;</span><span class="p">,</span><span class="s1">&#39;Sat&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Creating the order of the weekdays</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time_weekday&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;start_time_weekday&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Sun&#39;</span><span class="p">,</span> <span class="s1">&#39;Mon&#39;</span><span class="p">,</span><span class="s1">&#39;Tue&#39;</span><span class="p">,</span><span class="s1">&#39;Wed&#39;</span><span class="p">,</span><span class="s1">&#39;Thu&#39;</span><span class="p">,</span><span class="s1">&#39;Fri&#39;</span><span class="p">,</span><span class="s1">&#39;Sat&#39;</span><span class="p">],</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;FordBike Trips by Hour - Customers and Subscribers&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;semibold&#39;</span><span class="p">)</span>
 
+<span class="c1"># heatmap customers</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">df_customer</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;user_type == &quot;Customer&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;start_time_hour&quot;</span><span class="p">,</span> <span class="s2">&quot;start_time_weekday&quot;</span><span class="p">])[</span><span class="s2">&quot;bike_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_customer</span> <span class="o">=</span> <span class="n">df_customer</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;start_time_hour&quot;</span><span class="p">,</span> <span class="s2">&quot;start_time_weekday&quot;</span><span class="p">,</span> <span class="s2">&quot;bike_id&quot;</span><span class="p">)</span>
@@ -13541,6 +13366,7 @@ $(document).ready(function(){
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Weekday&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Start Time Hour&#39;</span><span class="p">)</span>
 
+<span class="c1"># heatmap subscribers</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="n">df_subscriber</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;user_type == &quot;Subscriber&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;start_time_hour&quot;</span><span class="p">,</span> <span class="s2">&quot;start_time_weekday&quot;</span><span class="p">])[</span><span class="s2">&quot;bike_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 <span class="n">df_subscriber</span> <span class="o">=</span> <span class="n">df_subscriber</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;start_time_hour&quot;</span><span class="p">,</span> <span class="s2">&quot;start_time_weekday&quot;</span><span class="p">,</span> <span class="s2">&quot;bike_id&quot;</span><span class="p">)</span>
@@ -13579,7 +13405,7 @@ $(document).ready(function(){
 </div>
 </div>
 
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13587,14 +13413,15 @@ $(document).ready(function(){
 
 </div>
 </div>
-</div>
+</div></section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input_hidden">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">base_color</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># histogram of trip duration per user type</span>
+<span class="n">base_color</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;duration_min &lt; 45&#39;</span><span class="p">)</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;duration_min&#39;</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s1">&#39;user_type&#39;</span><span class="p">,</span> <span class="n">kind</span> <span class="o">=</span> <span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">base_color</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">aspect</span> <span class="o">=</span> <span class="mi">2</span><span class="p">);</span>
 <span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s1">&#39;Duration, min&#39;</span><span class="p">,</span> <span class="s1">&#39;Amount of Trips&#39;</span><span class="p">)</span>
@@ -13629,22 +13456,6 @@ $(document).ready(function(){
 </div>
 
 </div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input_hidden">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
 
 </div></section></section>
